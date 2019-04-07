@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int n;
+
+void power(int a)
+{
+	if(a<n)
+	{
+		power(a*2);
+		if(a<n)
+		{
+			cout<<a<<"	";
+			n=n-a;
+		}
+	}
+}
+
+int main()
+{
+	int n;
+	cin>>n;
+	power(1);
+	return 0;
+}

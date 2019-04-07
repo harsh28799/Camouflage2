@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node
+{
+	char val;
+	struct Node *left;
+	struct Node *right;
+	Node(char ch)
+	{
+		this->val=ch;
+		this->left=NULL;
+		this->right=NULL;
+	}
+};
+
+void postTraverse(struct Node *node)
+{
+	if(node==NULL)
+		return;
+	postTraverse(node->left);
+	postTraverse(node->right);
+	cout<<node->val<<" ";
+}
+void preTraverse(struct Node *node)
+{
+	if(node==NULL)
+		return;	
+	cout<<node->val<<" ";
+	preTraverse(node->left);
+	preTraverse(node->right);
+}
+void inTraverse(struct Node *node)
+{
+	if(node==NULL)
+		return;
+	inTraverse(node->left);
+	cout<<node->val<<" ";
+	inTraverse(node->right);	
+}
+
+int main()
+{
+	struct Node *root=new Node('A');
+	root->left=new Node('B');
+	root->right=new Node('C');
+	root->left->left=new Node('D');
+	root->left->left->left=new Node('F');
+	root->left->left->left->left=new Node('G');
+	root->left->left->left->left->right=new Node('H');
+	root->left->right=new Node('E');
+	root->left->right->right=new Node('I');
+	root->left->right->right->right=new Node('J');
+	root->left->right->right->right->left=new Node('K');
+	root->left->right->right->right->right=new Node('L');
+	root->right->left=new Node('M');
+	root->right->left->right=new Node('N');
+	root->right->left->right->left=new Node('O');
+	root->right->left->right->right=new Node('P');
+	root->right->left->right->right->left=new Node('Q');
+	root->right->left->right->right->left->right=new Node('R');
+	root->right->left->right->right->left->right->left=new Node('S');
+	root->right->left->right->right->left->right->right=new Node('T');
+
+	cout<<"PREORDER DFS :	";
+	preTraverse(root);
+	cout<<endl;
+	cout<<"INORDER DFS  :	";
+	inTraverse(root);
+	cout<<endl;
+	cout<<"POSTORDER DFS:	";	
+	postTraverse(root);
+	cout<<endl;
+
+	return 0;
+}

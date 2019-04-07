@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<string.h>
+
+void swap(char *a, char *b)
+{
+ 	char temp=*a;
+ 	*a=*b;
+ 	*b=temp;
+}
+
+void permute(char *ch, int l, int r)
+{
+	if(l==r)
+		printf("%s\n",ch);
+	else
+	{
+		int i;
+		for(i=l;i<=r;i++)
+		{
+			swap((ch+l),(ch+i));
+			permute(ch, l+1,r);
+			swap((ch+l),(ch+i));
+		}
+	}
+}
+
+int main()
+{
+	char ch[]="encyclopedia";
+	permute(ch, 0, strlen(ch)-1);
+	return 0;
+}

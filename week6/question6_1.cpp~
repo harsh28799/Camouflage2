@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int coins[]={1,2,5,10,20,50,100,500,1000};
+	int size=8;
+	int coins2[]={1,5,6,9};
+	vector <int> change;
+	int amount=93;
+	while(amount>0)
+	{
+		int i=size;
+		for(;i>=0;i--)
+		{
+			if(coins[i]<=amount)
+				break;
+			else
+				continue;
+		}
+		change.push_back(coins[i]);
+		amount=amount-coins[i];
+	}
+	cout<<endl;
+	int j;
+	for(j=0;j<change.size();j++)
+		cout<<change[j]<<" ";
+	return 0;
+} 

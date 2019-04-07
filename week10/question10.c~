@@ -1,0 +1,95 @@
+#include <stdio.h> 
+#include <stdlib.h> 
+#define MAX_Q_SIZE 500 
+  
+struct node 
+{ 
+    char data; 
+    struct node* left; 
+    struct node* right; 
+}; 
+
+struct node** createQueue(int *, int *); 
+void enQueue(struct node **, int *, struct node *); 
+struct node *deQueue(struct node **, int *); 
+  
+void printLevelOrder(struct node* root) 
+{ 
+    int rear, front; 
+    struct node **queue = createQueue(&front, &rear); 
+    struct node *temp_node = root; 
+  
+    while (temp_node) 
+    { 
+        printf("%c ", temp_node->data); 
+  
+        if (temp_node->left) 
+            enQueue(queue, &rear, temp_node->left); 
+  
+        if (temp_node->right) 
+            enQueue(queue, &rear, temp_node->right); 
+  
+        temp_node = deQueue(queue, &front); 
+    } 
+} 
+  
+struct node** createQueue(int *front, int *rear) 
+{ 
+    struct node **queue = 
+        (struct node **)malloc(sizeof(struct node*)*MAX_Q_SIZE); 
+  
+    *front = *rear = 0; 
+    return queue; 
+} 
+  
+void enQueue(struct node **queue, int *rear, struct node *new_node) 
+{ 
+    queue[*rear] = new_node; 
+    (*rear)++; 
+} 
+  
+struct node *deQueue(struct node **queue, int *front) 
+{ 
+    (*front)++; 
+    return queue[*front - 1]; 
+} 
+  
+struct node* newNode(char data) 
+{ 
+    struct node* node = (struct node*) 
+                        malloc(sizeof(struct node)); 
+    node->data = data; 
+    node->left = NULL; 
+    node->right = NULL; 
+  
+    return(node); 
+} 
+  
+int main() 
+{ 
+    	struct Node *root=newNode('A');
+	root->left=newNode('B');
+	root->right=newNode('C');
+	root->left->left=newNode('D');
+	root->left->left->left=newNode('F');
+	root->left->left->left->left=newNode('G');
+	root->left->left->left->left->right=newNode('H');
+	root->left->right=newNode('E');
+	root->left->right->right=newNode('I');
+	root->left->right->right->right=newNode('J');
+	root->left->right->right->right->left=newNode('K');
+	root->left->right->right->right->right=newNode('L');
+	root->right->left=newNode('M');
+	root->right->right=newNode('N');
+	root->right->left->right=newNode('O');
+	root->right->right->right=newNode('P');
+	root->right->right->right->left=newNode('Q');
+	root->right->right->right->left->right=newNode('R');
+	root->right->right->right->left->right->left=newNode('S');
+	root->right->right->right->left->right->right=newNode('T');
+  
+    printf("Level Order traversal of binary tree is \n"); 
+    printLevelOrder(root); 
+  
+    return 0; 
+} 
